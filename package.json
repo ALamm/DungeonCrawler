@@ -2,7 +2,7 @@
   "name": "dungeon-crawler",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index_bundle.js",
+  "main": "index.js",
   "scripts": {
     "production": "webpack -p",
     "start": "webpack-dev-server"
