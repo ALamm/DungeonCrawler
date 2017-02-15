@@ -396,7 +396,7 @@ class Game extends React.Component {
         // if current square is a 'cave' cell check if it stays a 'cave' cell
         // based on the simple rule that to stay alive it must have more than 
         // 'maxNeighbor' surrounding it
-        if (val == true) {
+        if (val === true) {
             if (count >= this.state.maxNeighbor) {
                 return true;
             } else {
