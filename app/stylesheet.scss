@@ -1,0 +1,302 @@
+@import 'https://fonts.googleapis.com/css?family=Bree+Serif|Merriweather|Roboto+Slab';
+$blue: #0076a3;
+$offwhite: #e9e9e9;
+$darkblue: #022933;
+$yellow: #ffba00;
+$green: #548c27;
+$orange: #f39856;
+$red: #ea6153;
+$purple: #6d73c2;
+$gray: #e2e2e2;
+$brown: #332920;
+$black: black;
+$darkness: #3a3939;
+$cave: #d1d1d1;
+$rock: #607d8b;
+$player: black;
+$enemy: red;
+$boss: pink;
+$health: #90d243;
+$weapon: #fbe419;
+$dungeon1: brown;
+$dungeon2: gray;
+$pickAxe: #e14de1;
+$border: #fff;
+$itemWidth: 20px;
+$font-main: 'Roboto Slab',
+Helvetica,
+sans-serif;
+$font-markdown: 'Bree Serif',
+Helvetica,
+sans-serif;
+$font-table: 1.9rem;
+$color-backgrounds: $offwhite;
+$color-even-cells: #f6f6f6;
+$color-odd-cells: #e9e9e9;
+$color-headlines: $rock,
+$orange,
+$darkblue,
+$green,
+$yellow,
+$purple;
+// LOOP through the $color-headlines and assign to matching 'h' selector
+@for $item from 1 through length($color-headlines) {
+  h#{$item} {
+    color: nth($color-headlines, $item); // grab the nth item (defined by $item) from 'color-headlines'
+  }
+}
+
+@keyframes pulse {
+  0% {
+    background-color: $dungeon1;
+  }
+  100% {
+    background-color: $dungeon2;
+  }
+}
+
+body {
+  font-family: $font-main;
+  background-color: $offwhite;
+  // overflow-y:hidden;
+}
+
+p {
+  color: $darkblue
+}
+
+h3 {
+  font-size: 21px;
+}
+
+a:hover {
+  text-decoration: none;
+  // color: lighten($blue, .5);
+}
+
+ul {
+  list-style-type: none;
+}
+
+.pickAxe {
+  background: $pickAxe;
+}
+
+.nextDungeon {
+  animation: pulse 1s infinite
+}
+
+.nextDungeon.darkness {
+  animation: none;
+}
+
+.flex-container {
+  width: 402px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  display: flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  -webkit-flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.flex-item {
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  padding: 0px;
+  margin-top: 0px;
+  line-height: 20px;
+  color: $offwhite;
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
+}
+
+.flex-item.darkness {
+  background: $darkness;
+  border-right: 1px solid $darkness;
+  border-bottom: 1px solid $darkness;
+}
+
+.flex-legend-item {
+  float: left;
+  display: block;
+}
+
+.flex-legend-container {
+  width: 42px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.showSquare {
+  background: transparent;
+}
+
+.rock {
+  background: $rock;
+}
+
+.cave {
+  background: $cave;
+}
+
+.player {
+  background: $player;
+}
+
+.enemy {
+  background: $enemy;
+}
+
+.health {
+  background: $health;
+}
+
+.weapon {
+  background: $weapon;
+}
+
+.boss {
+  background: $boss;
+}
+
+.legendTitle {
+  font-size: 14px;
+  color: $black;
+  padding-left: 20px;
+  line-height: 14px;
+}
+
+.header {
+  padding-top: 0px;
+  padding-bottom: 5px;
+  float: left;
+}
+
+.regRow {
+  padding-bottom: 5px;
+}
+
+.grid {
+  margin-left: -15px;
+}
+
+.labels {
+  font-size: 15px!important;
+  text-align: left;
+}
+
+.instructions {
+  clear: both;
+  font-size: 12px;
+}
+
+div.labels:nth-child(2),
+div.labels:nth-child(3),
+div.labels:nth-child(4) {
+  margin-left: -15px;
+}
+
+.container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: inherit;
+  margin-left: inherit;
+}
+
+.btnctrl {
+  height: 30px;
+}
+
+.inputctrl {
+  width: 50px;
+  height: 25px;
+}
+
+.saveCtrl {
+  width: 120px;
+  height: 42px;
+  float: left;
+}
+
+.submitctrl {
+  margin-top: 5px;
+}
+
+.heading {
+  padding-top: 10px;
+}
+
+.left {
+  float: left;
+  margin-right: 50px;
+}
+
+.right {
+  float: right!important;
+}
+
+.btn-toolbar {
+  width: 100%;
+}
+
+.savedSelect {
+  margin-left: 10px;
+  height: 42px;
+  width: 100px;
+}
+
+.btn-toolbar {
+  margin-top: 15px;
+}
+
+.btn {
+  font-size: $font-table;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.noborder {
+  border: none!important;
+}
+
+.divider {
+  margin-top: 10px;
+  border-top: 1px solid #bbb;
+  padding-top: 10px;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+
+.checkbox input[type=checkbox] {
+  margin-left: 0px;
+}
+
+.checkboxLabel {
+  padding-left: 10px;
+}
+
+.checkboxLabel_2 {
+  padding-left: 30px;
+  font-weight: normal;
+}
+
+.gameboard {
+  float: left;
+}
+
+.sidebar {
+  position: relative;
+  left: 20px;
+}
