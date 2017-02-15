@@ -1,5 +1,5 @@
-# DungeonCrawler
-Rogue Like Dungeon Crawler game built using React
+# Rogue-like Dungeon Crawler Game
+Built using React
 
 Based on user stories provided by FreeCode Camp:
 
