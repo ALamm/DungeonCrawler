@@ -156,27 +156,23 @@ function AdminPanel (props) {
   return (
       <div className="header showAdmin" style={{display: props.showAdmin }}>
           <h3>Admin Interface</h3>
-          <div className="row header" style={{width: 400}}>
-              <div className="col-xs-6">
+          <div className="row header" style={{width: 600}}>
+              <div className="col-xs-4">
                   <div className="input-group input-group-sm">
                       <span className="input-group-addon" id="sizing-addon3">Square Size</span>
                       <input
-                          type="text"
+                          type="number"
                           className="form-control inputctrl"
                           value={props.squareSize}
                           onChange={props.handleSizeChange}
                           aria-describedby="sizing-addon3"/>
                   </div>
               </div>
-              <div className="col-xs-6">
-              </div>
-          </div>
-          <div className="row regRow" style={{width: 400}}>
-              <div className="col-xs-4">
+              {/*<div className="col-xs-4">
                   <div className="input-group input-group-sm">
                       <span className="input-group-addon" id="sizing-addon3">Rows</span>
                       <input
-                          type="text"
+                          type="number"
                           className="form-control inputctrl"
                           value={props.numberOfRows}
                           onChange={props.handleRowChange}
@@ -187,17 +183,18 @@ function AdminPanel (props) {
                   <div className="input-group input-group-sm">
                       <span className="input-group-addon" id="sizing-addon3">Cols</span>
                       <input
-                          type="text"
+                          type="number"
                           className="form-control inputctrl"
                           value={props.numberOfColumns}
                           onChange={props.handleColChange}
                           aria-describedby="sizing-addon3"/>
                   </div>
-              </div>
+              </div>*/}
           </div>  
       </div>     
   )
 }
+
 
 class Game extends React.Component {
   constructor () {
@@ -251,7 +248,14 @@ class Game extends React.Component {
     this.handleRowChange = this.handleRowChange.bind(this);
     this.handleColChange = this.handleColChange.bind(this);
     this.handleSizeChange = this.handleSizeChange.bind(this);
+
+    // NOTE:  .debounce is called once and can track itself this way
     
+    //  leading: true  - means the function will happen immediately 
+    //  and then wait for 'x' time of NO activity before executing again
+    //  trailing: true  - means the function will wait 'x' time of NO activity
+    //  and then execute
+    this.rebuild = _.debounce( this.rebuild, 2000, {leading: true, trailing: false});
   }
 
   componentWillMount () {
@@ -260,10 +264,10 @@ class Game extends React.Component {
 
   componentDidMount() {
       let movePlayer = this.move;
-      var listener = function (event) {
+      var listener = _.debounce(function (event) {
           let key = event.keyCode || event.charCode || 0;
           movePlayer(key);
-      }
+      }, 50, {leading: true, trailing: false});
       window.addEventListener('keydown', listener, false)
   }
 
@@ -273,11 +277,9 @@ class Game extends React.Component {
   }  
 
   rebuild(reset) {
-      let fn = _.debounce(() => {
-          this.buildArray(this.state.numberOfRows, this.state.numberOfColumns, this.state.initialCaveFill, this.state.squareSize, reset)
-      }, 300, {'leading': true});
-      fn();
+      this.buildArray(this.state.numberOfRows, this.state.numberOfColumns, this.state.initialCaveFill, this.state.squareSize, reset)
   }
+  
   
   // create a list of 'special' squares eg. the left-most and right-most cols
   createSpecial(rows, cols) {
@@ -749,14 +751,10 @@ class Game extends React.Component {
   handleSizeChange(event) {
       let width = this.state.numberOfColumns * event.target.value + 2;
       let squareSize = Number(event.target.value);
-
-      let fn = _.debounce(() => {
-          this.setState({
-              width: width,
-              squareSize: squareSize
-          })
-      }, 300,{'leading':true});
-      fn();
+      this.setState({
+          width: width,
+          squareSize: squareSize
+        })    
   }
 
   handleRowChange(event) {
@@ -867,7 +865,7 @@ class Game extends React.Component {
                   numberOfColumns = {this.state.numberOfColumns}
                   handleRowChange = {this.handleRowChange}
                   handleColChange = {this.handleColChange}
-                  handleSizeChange = {this.handleSizeChange}/>
+                  handleSizeChange = { this.handleSizeChange}/>
           </div>            
       );
   }
